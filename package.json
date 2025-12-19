@@ -1,0 +1,30 @@
+{
+  "name": "tarkov-data-overlay",
+  "version": "1.0.0",
+  "description": "Community-maintained data overlay for tarkov.dev API corrections and additions",
+  "type": "module",
+  "scripts": {
+    "validate": "tsx scripts/validate.ts",
+    "build": "tsx scripts/build.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "tarkov",
+    "escape-from-tarkov",
+    "tarkov-dev",
+    "api",
+    "overlay",
+    "data"
+  ],
+  "author": "Lab",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "ajv": "^8.12.0",
+    "json5": "^2.2.3",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.1.0"
+  }
+}

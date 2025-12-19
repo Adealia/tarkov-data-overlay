@@ -1,0 +1,9 @@
+{
+  // Hideout corrections go here
+  // Format:
+  // // [Station Name] - Brief description
+  // // Proof: [wiki link]
+  // "<station-id>": {
+  //   "fieldName": value  // Was: old_value
+  // }
+}

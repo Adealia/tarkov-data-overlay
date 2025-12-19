@@ -1,0 +1,9 @@
+{
+  // Trader corrections go here
+  // Format:
+  // // [Trader Name] - Brief description
+  // // Proof: [wiki link]
+  // "<trader-id>": {
+  //   "fieldName": value  // Was: old_value
+  // }
+}

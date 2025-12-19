@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "edition.schema.json",
+  "title": "Game Edition",
+  "description": "Schema for game edition data in tarkov-data-overlay",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier for the edition"
+      },
+      "title": {
+        "type": "string",
+        "description": "Display name of the edition"
+      },
+      "stashLevel": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 5,
+        "description": "Starting stash level (1-5)"
+      },
+      "cultistCircleLevel": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 3,
+        "description": "Starting Cultist Circle level (0-3)"
+      },
+      "traderRepBonus": {
+        "type": "object",
+        "description": "Starting reputation bonus per trader",
+        "additionalProperties": {
+          "type": "number"
+        }
+      }
+    },
+    "required": ["id", "title", "stashLevel", "cultistCircleLevel", "traderRepBonus"],
+    "additionalProperties": true
+  }
+}

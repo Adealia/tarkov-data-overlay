@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "overlay.schema.json",
+  "title": "Tarkov Data Overlay",
+  "description": "Root schema for compiled overlay output",
+  "type": "object",
+  "properties": {
+    "tasks": {
+      "$ref": "task-override.schema.json"
+    },
+    "items": {
+      "type": "object",
+      "description": "Item corrections"
+    },
+    "traders": {
+      "type": "object",
+      "description": "Trader corrections"
+    },
+    "hideout": {
+      "type": "object",
+      "description": "Hideout corrections"
+    },
+    "editions": {
+      "$ref": "edition.schema.json"
+    },
+    "$meta": {
+      "type": "object",
+      "properties": {
+        "version": { "type": "string" },
+        "generated": { "type": "string", "format": "date-time" },
+        "sha256": { "type": "string" }
+      },
+      "required": ["version", "generated"],
+      "description": "Build metadata"
+    }
+  },
+  "additionalProperties": false
+}

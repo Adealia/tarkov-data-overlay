@@ -1,0 +1,9 @@
+{
+  // Item corrections go here
+  // Format:
+  // // [Item Name] - Brief description
+  // // Proof: [wiki link]
+  // "<item-id>": {
+  //   "fieldName": value  // Was: old_value
+  // }
+}

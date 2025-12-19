@@ -1,0 +1,50 @@
+{
+  // Grenadier - Level requirement incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Grenadier
+  // tarkov.dev shows 20, wiki confirms 10
+  "5936d90786f7742b1420ba5b": {
+    "minPlayerLevel": 10  // Was: 20
+  },
+
+  // Easy Money - Part 1 - Level requirement incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Easy_Money_-_Part_1
+  "66058cb22cee99303f1ba067": {
+    "minPlayerLevel": 10  // Was: 20
+  },
+
+  // Test Drive - Part 1 - Level requirement incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Test_Drive_-_Part_1
+  "6179b5eabca27a099552e052": {
+    "minPlayerLevel": 18  // Was: 30
+  },
+
+  // Test Drive - Part 2 - Level requirement incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Test_Drive_-_Part_2
+  "6179b5b06e9dd54ac275e409": {
+    "minPlayerLevel": 22  // Was: 30
+  },
+
+  // Test Drive - Part 3 - Level requirement incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Test_Drive_-_Part_3
+  "6179b57a5c1f6766cc09a00e": {
+    "minPlayerLevel": 25  // Was: 30
+  },
+
+  // Test Drive - Part 4 - Level requirement incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Test_Drive_-_Part_4
+  "6179b53f6e9dd54ac275e406": {
+    "minPlayerLevel": 28  // Was: 40
+  },
+
+  // Test Drive - Part 5 - Level requirement incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Test_Drive_-_Part_5
+  "6179b4ffc52e8b00141a8c70": {
+    "minPlayerLevel": 32  // Was: 40
+  },
+
+  // Test Drive - Part 6 - Level requirement incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Test_Drive_-_Part_6
+  "675c1ff1a757ddd00404f0aa": {
+    "minPlayerLevel": 35  // Was: 40
+  }
+}

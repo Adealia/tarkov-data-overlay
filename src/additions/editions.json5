@@ -1,0 +1,62 @@
+{
+  // Game Edition data - not available in tarkov.dev API
+  // Source: In-game data and official Battlestate Games information
+
+  "standard": {
+    "id": "standard",
+    "title": "Standard Edition",
+    "stashLevel": 1,
+    "cultistCircleLevel": 0,
+    "traderRepBonus": {}
+  },
+
+  "left_behind": {
+    "id": "left_behind",
+    "title": "Left Behind Edition",
+    "stashLevel": 2,
+    "cultistCircleLevel": 0,
+    "traderRepBonus": {}
+  },
+
+  "prepare_for_escape": {
+    "id": "prepare_for_escape",
+    "title": "Prepare for Escape Edition",
+    "stashLevel": 3,
+    "cultistCircleLevel": 0,
+    "traderRepBonus": {}
+  },
+
+  "edge_of_darkness": {
+    "id": "edge_of_darkness",
+    "title": "Edge of Darkness Edition",
+    "stashLevel": 4,
+    "cultistCircleLevel": 0,
+    "traderRepBonus": {
+      "prapor": 0.2,
+      "therapist": 0.2,
+      "fence": 0.2,
+      "skier": 0.2,
+      "peacekeeper": 0.2,
+      "mechanic": 0.2,
+      "ragman": 0.2,
+      "jaeger": 0.2
+    }
+  },
+
+  "unheard": {
+    "id": "unheard",
+    "title": "The Unheard Edition",
+    "stashLevel": 5,
+    "cultistCircleLevel": 3,
+    "traderRepBonus": {
+      "prapor": 0.2,
+      "therapist": 0.2,
+      "fence": 0.2,
+      "skier": 0.2,
+      "peacekeeper": 0.2,
+      "mechanic": 0.2,
+      "ragman": 0.2,
+      "jaeger": 0.2
+    }
+  }
+}
