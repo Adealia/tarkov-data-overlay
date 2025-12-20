@@ -64,6 +64,27 @@ function applyOverlay(baseTask: Task, overlay: Overlay): Task {
 }
 ```
 
+### Filtering Disabled Tasks
+
+Some tasks are marked as `disabled: true` when they've been removed from standard gameplay (event-only quests, removed content, etc.). Filter them out:
+
+```typescript
+function applyOverlay(baseTask: Task, overlay: Overlay): Task | null {
+  const taskOverride = overlay.tasks?.[baseTask.id];
+  if (!taskOverride) return baseTask;
+
+  // Filter out disabled tasks
+  if (taskOverride.disabled === true) return null;
+
+  return { ...baseTask, ...taskOverride };
+}
+
+// Usage with filtering
+const activeTasks = tasks
+  .map(task => applyOverlay(task, overlay))
+  .filter((task): task is Task => task !== null);
+```
+
 ### With Objective Patches
 
 For tasks with objective-level corrections:
@@ -172,6 +193,9 @@ interface Overlay {
 
 interface TaskOverride {
   minPlayerLevel?: number;
+  name?: string;
+  wikiLink?: string;
+  disabled?: boolean;
   map?: { id: string; name: string };
   objectives?: Record<string, ObjectiveOverride>;
   // ... other fields

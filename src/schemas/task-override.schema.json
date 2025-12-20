@@ -13,6 +13,18 @@
         "maximum": 79,
         "description": "Minimum PMC level required to start the task"
       },
+      "name": {
+        "type": "string",
+        "description": "Task name override"
+      },
+      "wikiLink": {
+        "type": "string",
+        "description": "Corrected wiki link URL"
+      },
+      "disabled": {
+        "type": "boolean",
+        "description": "Mark task as disabled/removed from standard gameplay. Consumers should filter out disabled tasks."
+      },
       "map": {
         "type": "object",
         "properties": {

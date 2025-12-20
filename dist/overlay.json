@@ -23,6 +23,31 @@
     },
     "66058cb22cee99303f1ba067": {
       "minPlayerLevel": 10
+    },
+    "60e71c48c1bfa3050473b8e5": {
+      "minPlayerLevel": 38
+    },
+    "6740a2c17e3818d5bb0648b6": {
+      "name": "Half Empty",
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/Half_Empty"
+    },
+    "6863cf925eaeb676d50a9651": {
+      "disabled": true
+    },
+    "6863d9bcd3bfdcb2bc075956": {
+      "disabled": true
+    },
+    "6863e09a5f4d17fd3e01feee": {
+      "disabled": true
+    },
+    "686403eeb4aaef121c0f0f06": {
+      "disabled": true
+    },
+    "686404d348e7bb4146002cac": {
+      "disabled": true
+    },
+    "6864fcef9809a149400dd2ee": {
+      "disabled": true
     }
   },
   "editions": {
@@ -104,7 +129,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2025-12-19T13:43:18.473Z",
-    "sha256": "72c812d3dd7c9996360e0dad2abed9fe8f6429a86345750bb7c95f99415dc040"
+    "generated": "2025-12-20T19:19:52.758Z",
+    "sha256": "c9ba24a4d256c34c42db23727c3e3cd953068cf201648e62b8179a85aa9b934b"
   }
 }
