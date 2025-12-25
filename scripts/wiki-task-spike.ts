@@ -332,6 +332,13 @@ function saveWikiCache(
   fs.writeFileSync(getWikiCachePath(taskId), JSON.stringify(cache, null, 2));
 }
 
+type SuppressedFieldsResult = {
+  suppressed: Set<string>;
+  overlayCount: number;
+  wikiIncorrectCount: number;
+  wikiIncorrectKeys: Set<string>;  // Track wiki-incorrect separately to check for stale entries
+};
+
 /**
  * Load suppressed fields from both:
  * 1. Tasks overlay (API was wrong, we corrected it)
@@ -339,8 +346,9 @@ function saveWikiCache(
  *
  * Returns a Set of "taskId:field" keys to exclude from results
  */
-function loadSuppressedFields(): { suppressed: Set<string>; overlayCount: number; wikiIncorrectCount: number } {
+function loadSuppressedFields(): SuppressedFieldsResult {
   const suppressed = new Set<string>();
+  const wikiIncorrectKeys = new Set<string>();
   let overlayCount = 0;
   let wikiIncorrectCount = 0;
 
@@ -379,7 +387,9 @@ function loadSuppressedFields(): { suppressed: Set<string>; overlayCount: number
 
       for (const [taskId, fields] of Object.entries(suppressions)) {
         for (const field of fields) {
-          suppressed.add(`${taskId}:${field}`);
+          const key = `${taskId}:${field}`;
+          suppressed.add(key);
+          wikiIncorrectKeys.add(key);
           wikiIncorrectCount++;
         }
       }
@@ -388,7 +398,7 @@ function loadSuppressedFields(): { suppressed: Set<string>; overlayCount: number
     }
   }
 
-  return { suppressed, overlayCount, wikiIncorrectCount };
+  return { suppressed, overlayCount, wikiIncorrectCount, wikiIncorrectKeys };
 }
 
 function parseArgs(argv: string[]): CliOptions & { help?: boolean } {
@@ -1091,7 +1101,7 @@ async function runBulkMode(tasks: ExtendedTaskData[], options: CliOptions): Prom
   printProgress(`Found ${tasksWithWiki.length}/${tasks.length} tasks with wiki links`);
 
   // Load suppressed fields (overlay corrections + wiki-incorrect suppressions)
-  const { suppressed, overlayCount, wikiIncorrectCount } = loadSuppressedFields();
+  const { suppressed, overlayCount, wikiIncorrectCount, wikiIncorrectKeys } = loadSuppressedFields();
   if (overlayCount > 0 || wikiIncorrectCount > 0) {
     printProgress(`Loaded ${overlayCount} overlay correction(s), ${wikiIncorrectCount} wiki-incorrect suppression(s)`);
   }
@@ -1163,6 +1173,31 @@ async function runBulkMode(tasks: ExtendedTaskData[], options: CliOptions): Prom
     if (unknownCount > 0) {
       console.log(`  ⚪ Unknown: ${unknownCount} ${dim('(no revision data)')}`);
     }
+  }
+
+  // Check for stale wiki-incorrect suppressions (wiki now matches API)
+  const allDiscrepancyKeys = new Set(allDiscrepancies.map(d => `${d.taskId}:${d.field}`));
+  const staleSuppresions: string[] = [];
+  for (const key of wikiIncorrectKeys) {
+    if (!allDiscrepancyKeys.has(key)) {
+      staleSuppresions.push(key);
+    }
+  }
+
+  if (staleSuppresions.length > 0) {
+    console.log();
+    printHeader('STALE WIKI-INCORRECT SUPPRESSIONS');
+    console.log(`  ${bold('These suppressions can be removed')} - wiki now matches API:`);
+    console.log();
+    for (const key of staleSuppresions) {
+      const [taskId, field] = key.split(':');
+      const task = tasksWithWiki.find(t => t.id === taskId);
+      const taskName = task?.name ?? 'Unknown Task';
+      console.log(`  🗑️  ${taskName} ${dim(`[${field}]`)}`);
+      console.log(`     ${dim(`ID: ${taskId}`)}`);
+    }
+    console.log();
+    console.log(`  ${dim(`Remove from: src/suppressions/wiki-incorrect.json5`)}`);
   }
   console.log();
 
