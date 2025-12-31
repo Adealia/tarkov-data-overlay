@@ -27,7 +27,29 @@
       "experience": 9100,
       "objectives": {
         "5c1b765d86f77413193fa4f2": {
-          "count": 10
+          "count": 10,
+          "description": "Eliminate PMC operatives using an SR-25 with Hybrid 46 suppressor and Schmidt & Bender PM II 1-8x24 scope",
+          "usingWeapon": [
+            {
+              "id": "5df8ce05b11454561e39243b",
+              "name": "Knight's Armament Company SR-25 7.62x51 marksman rifle",
+              "shortName": "SR-25"
+            }
+          ],
+          "usingWeaponMods": [
+            [
+              {
+                "id": "59bffbb386f77435b379b9c2",
+                "name": "SilencerCo Hybrid 46 multi-caliber sound suppressor",
+                "shortName": "Hybrid 46"
+              },
+              {
+                "id": "617151c1d92c473c770214ab",
+                "name": "Schmidt & Bender PM II 1-8x24 30mm riflescope",
+                "shortName": "PM II 1-8"
+              }
+            ]
+          ]
         }
       }
     },
@@ -75,6 +97,196 @@
           }
         ]
       }
+    },
+    "63a5cf262964a7488f5243ce": {
+      "experience": 12000,
+      "map": {
+        "id": "5714dc692459777137212e12",
+        "name": "Streets of Tarkov"
+      },
+      "objectives": {
+        "63a5cf262964a7488f5243d1": {
+          "description": "Eliminate PMC operatives while using an MP5SD with PRO sight on Streets of Tarkov, Ground Zero or Interchange",
+          "usingWeapon": [
+            {
+              "id": "59411abb86f77478f702b5d2",
+              "name": "HK MP5 9x19 submachine gun (Navy 3 Round Burst) SD",
+              "shortName": "MP5 SD"
+            }
+          ],
+          "usingWeaponMods": [
+            [
+              {
+                "id": "61659f79d92c473c770213ee",
+                "name": "Aimpoint PRO reflex sight",
+                "shortName": "PRO"
+              }
+            ]
+          ],
+          "maps": [
+            {
+              "id": "5714dc692459777137212e12",
+              "name": "Streets of Tarkov"
+            },
+            {
+              "id": "653e6760052c01c1c805532f",
+              "name": "Ground Zero"
+            },
+            {
+              "id": "5714dbc024597771384a510d",
+              "name": "Interchange"
+            }
+          ]
+        }
+      }
+    },
+    "64f5deac39e45b527a7c4232": {
+      "experience": 18000,
+      "map": {
+        "id": "5704e4dad2720bb55b8b4567",
+        "name": "Lighthouse"
+      },
+      "objectives": {
+        "64f5deac39e45b527a7c4235": {
+          "description": "Eliminate PMC operatives while using an AK-12 with the proprietary suppressor and PS-320 scope on Lighthouse, Customs, or Reserve",
+          "usingWeapon": [
+            {
+              "id": "6499849fc93611967b034949",
+              "name": "Kalashnikov AK-12 5.45x39 assault rifle",
+              "shortName": "AK-12"
+            }
+          ],
+          "usingWeaponMods": [
+            [
+              {
+                "id": "64c196ad26a15b84aa07132f",
+                "name": "AK-12 5.45x39 sound suppressor",
+                "shortName": "AK-12"
+              },
+              {
+                "id": "5c0517910db83400232ffee5",
+                "name": "Valday PS-320 1/6x scope",
+                "shortName": "PS-320"
+              }
+            ]
+          ],
+          "maps": [
+            {
+              "id": "5704e4dad2720bb55b8b4567",
+              "name": "Lighthouse"
+            },
+            {
+              "id": "56f40101d2720b2a4d8b45d6",
+              "name": "Customs"
+            },
+            {
+              "id": "5704e5fad2720bc05b8b4567",
+              "name": "Reserve"
+            }
+          ]
+        }
+      }
+    },
+    "6574e0dedc0d635f633a5805": {
+      "experience": 20000,
+      "map": {
+        "id": "5704e554d2720bac5b8b456e",
+        "name": "Shoreline"
+      },
+      "objectives": {
+        "6574e0dedc0d635f633a5807": {
+          "description": "Eliminate any targets while using an RPDN with EKP-1S-03 sight on Shoreline, Interchange or Woods",
+          "usingWeapon": [
+            {
+              "id": "65268d8ecb944ff1e90ea385",
+              "name": "Degtyarev RPDN 7.62x39 machine gun",
+              "shortName": "RPDN"
+            }
+          ],
+          "usingWeaponMods": [
+            [
+              {
+                "id": "6544d4187c5457729210d277",
+                "name": "Axion Kobra EKP-1S-03 reflex sight (Dovetail)",
+                "shortName": "EKP-1S-03"
+              }
+            ]
+          ],
+          "maps": [
+            {
+              "id": "5704e554d2720bac5b8b456e",
+              "name": "Shoreline"
+            },
+            {
+              "id": "5714dbc024597771384a510d",
+              "name": "Interchange"
+            },
+            {
+              "id": "5704e3c2d2720bac5b8b4567",
+              "name": "Woods"
+            }
+          ]
+        }
+      }
+    },
+    "669fa3a40c828825de06d6a1": {
+      "experience": 23000,
+      "finishRewards": {
+        "items": [
+          {
+            "item": {
+              "id": "5449016a4bdc2d6f028b456f",
+              "name": "Roubles"
+            },
+            "count": 500000
+          }
+        ]
+      },
+      "objectives": {
+        "66a0f5a7f9eae6761253114c": {
+          "description": "Eliminate any targets while using an SR-2M with suppressor and KP-SR2 sight on Factory",
+          "usingWeapon": [
+            {
+              "id": "62e14904c2699c0ec93adc47",
+              "name": "SR-2M Veresk 9x21 submachine gun",
+              "shortName": "SR-2M"
+            }
+          ],
+          "usingWeaponMods": [
+            [
+              {
+                "id": "62e2a7138e1ac9380579c122",
+                "name": "SR-2M 9x21 SV-1381 sound suppressor",
+                "shortName": "SV-1381"
+              },
+              {
+                "id": "62ff9920fe938a24c90c10d2",
+                "name": "SR-2M KP-SR2 reflex sight",
+                "shortName": "KP-SR2"
+              }
+            ]
+          ],
+          "maps": [
+            {
+              "id": "55f2d3fd4bdc2d5f408b4567",
+              "name": "Factory"
+            }
+          ]
+        }
+      }
+    },
+    "675c1ff1a757ddd00404f0aa": {
+      "experience": 32000,
+      "finishRewards": {
+        "traderStanding": [
+          {
+            "trader": {
+              "name": "Prapor"
+            },
+            "standing": 0.02
+          }
+        ]
+      }
     }
   },
   "editions": {
@@ -117,7 +329,11 @@
         "mechanic": 0.2,
         "ragman": 0.2,
         "jaeger": 0.2
-      }
+      },
+      "exclusiveTaskIds": [
+        "666314b0acf8442f8b0531a1",
+        "666314b2a9290f9e0806cca3"
+      ]
     },
     "unheard": {
       "id": "unheard",
@@ -134,7 +350,10 @@
         "mechanic": 0.2,
         "ragman": 0.2,
         "jaeger": 0.2
-      }
+      },
+      "excludedTaskIds": [
+        "666314a50aa5c7436c00908a"
+      ]
     },
     "edge_of_darkness_unheard": {
       "id": "edge_of_darkness_unheard",
@@ -151,12 +370,19 @@
         "mechanic": 0.2,
         "ragman": 0.2,
         "jaeger": 0.2
-      }
+      },
+      "exclusiveTaskIds": [
+        "666314b0acf8442f8b0531a1",
+        "666314b2a9290f9e0806cca3"
+      ],
+      "excludedTaskIds": [
+        "666314a50aa5c7436c00908a"
+      ]
     }
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2025-12-25T11:06:28.651Z",
-    "sha256": "f9415494050ba09818c4a39ee1eec59692f3d1b2e20d13aac5dbd006ac987a77"
+    "generated": "2025-12-31T16:32:21.654Z",
+    "sha256": "810655657bc2ba049a85ca2ab61beacf3c17633017808527c420d58bf1c2c727"
   }
 }

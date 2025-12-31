@@ -1,47 +1,68 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "edition.schema.json",
-  "title": "Game Edition",
-  "description": "Schema for game edition data in tarkov-data-overlay",
-  "type": "object",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": {
-    "type": "object",
+    "additionalProperties": true,
     "properties": {
-      "id": {
-        "type": "string",
-        "description": "Unique identifier for the edition"
-      },
-      "value": {
-        "type": "integer",
-        "minimum": 1,
-        "maximum": 10,
-        "description": "Numeric ID used by TarkovTracker (1-6+)"
-      },
-      "title": {
-        "type": "string",
-        "description": "Display name of the edition"
+      "defaultCultistCircleLevel": {
+        "description": "Starting Cultist Circle level (0-3)",
+        "maximum": 3,
+        "minimum": 0,
+        "type": "integer"
       },
       "defaultStashLevel": {
-        "type": "integer",
-        "minimum": 1,
+        "description": "Starting stash level (1-5)",
         "maximum": 5,
-        "description": "Starting stash level (1-5)"
+        "minimum": 1,
+        "type": "integer"
       },
-      "defaultCultistCircleLevel": {
-        "type": "integer",
-        "minimum": 0,
-        "maximum": 3,
-        "description": "Starting Cultist Circle level (0-3)"
+      "excludedTaskIds": {
+        "description": "Task IDs not available to this edition (edition already grants the perk)",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "exclusiveTaskIds": {
+        "description": "Task IDs only available to this edition (tarkov.dev IDs)",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "id": {
+        "description": "Unique identifier for the edition",
+        "type": "string"
+      },
+      "title": {
+        "description": "Display name of the edition",
+        "type": "string"
       },
       "traderRepBonus": {
-        "type": "object",
-        "description": "Starting reputation bonus per trader",
         "additionalProperties": {
           "type": "number"
-        }
+        },
+        "description": "Starting reputation bonus per trader",
+        "type": "object"
+      },
+      "value": {
+        "description": "Numeric ID used by TarkovTracker (1-6+)",
+        "maximum": 10,
+        "minimum": 1,
+        "type": "integer"
       }
     },
-    "required": ["id", "value", "title", "defaultStashLevel", "defaultCultistCircleLevel", "traderRepBonus"],
-    "additionalProperties": true
-  }
+    "required": [
+      "id",
+      "value",
+      "title",
+      "defaultStashLevel",
+      "defaultCultistCircleLevel",
+      "traderRepBonus"
+    ],
+    "type": "object"
+  },
+  "description": "Schema for game edition data in tarkov-data-overlay",
+  "title": "Game Edition",
+  "type": "object"
 }

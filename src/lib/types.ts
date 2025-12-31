@@ -16,14 +16,44 @@ export interface TaskOverride {
   lightkeeperRequired?: boolean;
   objectives?: Record<string, ObjectiveOverride>;
   taskRequirements?: TaskRequirement[];
+  experience?: number;
+  finishRewards?: TaskFinishRewards;
+}
+
+/** Task completion rewards */
+export interface TaskFinishRewards {
+  items?: Array<{ item: { id?: string; name: string; shortName?: string }; count: number }>;
+  traderStanding?: Array<{ trader: { id?: string; name: string }; standing: number }>;
+}
+
+/** Task objective from tarkov.dev API */
+export interface TaskObjective {
+  id: string;
+  type?: string;
+  description?: string;
+  count?: number;
+  maps?: Array<{ id: string; name: string }>;
+  items?: TaskItemRef[];
+  markerItem?: TaskItemRef;
+  questItem?: TaskItemRef;
+  useAny?: TaskItemRef[];
+  usingWeapon?: TaskItemRef[];
+  usingWeaponMods?: Array<TaskItemRef[]>;
+  item?: TaskItemRef;
+  containsAll?: TaskItemRef[];
+  requiredKeys?: Array<TaskItemRef[]>;
+  foundInRaid?: boolean;
+}
+
+/** Task item reference */
+export interface TaskItemRef {
+  id: string;
+  name: string;
+  shortName?: string;
 }
 
 /** Objective override for nested corrections */
-export interface ObjectiveOverride {
-  count?: number;
-  description?: string;
-  maps?: Array<{ id: string; name: string }>;
-}
+export interface ObjectiveOverride extends Omit<Partial<TaskObjective>, "id"> {}
 
 /** Task requirement reference */
 export interface TaskRequirement {
@@ -40,14 +70,8 @@ export interface TaskData {
   map?: { id: string; name: string };
   taskRequirements?: TaskRequirement[];
   objectives?: TaskObjective[];
-}
-
-/** Task objective from tarkov.dev API */
-export interface TaskObjective {
-  id: string;
-  description?: string;
-  count?: number;
-  maps?: Array<{ id: string; name: string }>;
+  experience?: number;
+  finishRewards?: TaskFinishRewards;
 }
 
 /** Validation result for a single override */
@@ -60,12 +84,16 @@ export interface ValidationResult {
 }
 
 /** Possible validation statuses */
-export type ValidationStatus = 'NEEDED' | 'FIXED' | 'NOT_FOUND' | 'REMOVED_FROM_API';
+export type ValidationStatus =
+  | "NEEDED"
+  | "FIXED"
+  | "NOT_FOUND"
+  | "REMOVED_FROM_API";
 
 /** Detail about a specific field validation */
 export interface ValidationDetail {
   field: string;
-  status: 'needed' | 'fixed' | 'check' | 'info';
+  status: "needed" | "fixed" | "check" | "info";
   message: string;
 }
 
@@ -103,6 +131,6 @@ export interface SchemaConfig {
 
 /** Default schema configurations */
 export const SCHEMA_CONFIGS: SchemaConfig[] = [
-  { pattern: 'tasks.json5', schemaFile: 'task-override.schema.json' },
-  { pattern: 'editions.json5', schemaFile: 'edition.schema.json' },
+  { pattern: "tasks.json5", schemaFile: "task-override.schema.json" },
+  { pattern: "editions.json5", schemaFile: "edition.schema.json" },
 ];

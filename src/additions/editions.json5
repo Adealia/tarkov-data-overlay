@@ -9,6 +9,8 @@
   // - defaultStashLevel: Starting stash level (1-5)
   // - defaultCultistCircleLevel: Starting cultist circle level (0 or 3)
   // - traderRepBonus: Starting reputation bonus per trader (0.0 or 0.2)
+  // - exclusiveTaskIds: Task IDs only available to this edition (tarkov.dev IDs)
+  // - excludedTaskIds: Task IDs not available to this edition (edition already grants the perk)
 
   "standard": {
     "id": "standard",
@@ -52,7 +54,16 @@
       "mechanic": 0.2,
       "ragman": 0.2,
       "jaeger": 0.2
-    }
+    },
+    // Hell on Earth questline is Edge of Darkness only.
+    // Proof: https://escapefromtarkov.fandom.com/wiki/Hell_on_Earth_-_Part_1
+    // Proof: https://escapefromtarkov.fandom.com/wiki/Hell_on_Earth_-_Part_2
+    "exclusiveTaskIds": [
+      // Hell on Earth - Part 1
+      "666314b0acf8442f8b0531a1",
+      // Hell on Earth - Part 2
+      "666314b2a9290f9e0806cca3"
+    ]
   },
 
   "unheard": {
@@ -70,7 +81,13 @@
       "mechanic": 0.2,
       "ragman": 0.2,
       "jaeger": 0.2
-    }
+    },
+    // Old Patterns is not available to The Unheard Edition owners.
+    // Proof: https://escapefromtarkov.fandom.com/wiki/Old_Patterns
+    "excludedTaskIds": [
+      // Old Patterns
+      "666314a50aa5c7436c00908a"
+    ]
   },
 
   "edge_of_darkness_unheard": {
@@ -88,6 +105,21 @@
       "mechanic": 0.2,
       "ragman": 0.2,
       "jaeger": 0.2
-    }
+    },
+    // Hell on Earth questline is Edge of Darkness only.
+    // Proof: https://escapefromtarkov.fandom.com/wiki/Hell_on_Earth_-_Part_1
+    // Proof: https://escapefromtarkov.fandom.com/wiki/Hell_on_Earth_-_Part_2
+    "exclusiveTaskIds": [
+      // Hell on Earth - Part 1
+      "666314b0acf8442f8b0531a1",
+      // Hell on Earth - Part 2
+      "666314b2a9290f9e0806cca3"
+    ],
+    // Old Patterns is not available to The Unheard Edition owners.
+    // Proof: https://escapefromtarkov.fandom.com/wiki/Old_Patterns
+    "excludedTaskIds": [
+      // Old Patterns
+      "666314a50aa5c7436c00908a"
+    ]
   }
 }

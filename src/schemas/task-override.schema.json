@@ -1,122 +1,333 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "task-override.schema.json",
-  "title": "Task Override",
-  "description": "Schema for task corrections in tarkov-data-overlay",
-  "type": "object",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": {
-    "type": "object",
+    "additionalProperties": true,
     "properties": {
-      "minPlayerLevel": {
-        "type": "integer",
-        "minimum": 1,
-        "maximum": 79,
-        "description": "Minimum PMC level required to start the task"
-      },
-      "name": {
-        "type": "string",
-        "description": "Task name override"
-      },
-      "wikiLink": {
-        "type": "string",
-        "description": "Corrected wiki link URL"
-      },
       "disabled": {
-        "type": "boolean",
-        "description": "Mark task as disabled/removed from standard gameplay. Consumers should filter out disabled tasks."
-      },
-      "map": {
-        "type": "object",
-        "properties": {
-          "id": { "type": "string" },
-          "name": { "type": "string" }
-        },
-        "required": ["id", "name"],
-        "additionalProperties": false,
-        "description": "Map where the task takes place"
-      },
-      "kappaRequired": {
-        "type": "boolean",
-        "description": "Whether task is required for Kappa container"
-      },
-      "lightkeeperRequired": {
-        "type": "boolean",
-        "description": "Whether task is required for Lightkeeper access"
-      },
-      "objectives": {
-        "type": "object",
-        "description": "ID-keyed objective patches",
-        "additionalProperties": {
-          "type": "object",
-          "properties": {
-            "count": { "type": "integer", "minimum": 1 },
-            "description": { "type": "string" },
-            "maps": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": { "type": "string" },
-                  "name": { "type": "string" }
-                },
-                "required": ["id", "name"]
-              }
-            }
-          },
-          "additionalProperties": true
-        }
-      },
-      "taskRequirements": {
-        "type": "array",
-        "description": "Task prerequisites/requirements",
-        "items": {
-          "type": "object",
-          "properties": {
-            "task": {
-              "type": "object",
-              "properties": {
-                "id": { "type": "string" },
-                "name": { "type": "string" }
-              },
-              "required": ["id", "name"],
-              "additionalProperties": false
-            }
-          },
-          "required": ["task"],
-          "additionalProperties": true
-        }
+        "description": "Mark task as disabled/removed from standard gameplay. Consumers should filter out disabled tasks.",
+        "type": "boolean"
       },
       "experience": {
-        "type": "integer",
+        "description": "Experience points rewarded on task completion",
         "minimum": 0,
-        "description": "Experience points rewarded on task completion"
+        "type": "integer"
       },
       "finishRewards": {
-        "type": "object",
         "description": "Rewards given on task completion",
         "properties": {
           "items": {
-            "type": "array",
             "description": "Item rewards (including money)",
             "items": {
-              "type": "object",
               "properties": {
-                "item": {
-                  "type": "object",
-                  "properties": {
-                    "id": { "type": "string" },
-                    "name": { "type": "string" }
-                  },
-                  "required": ["id", "name"]
+                "count": {
+                  "minimum": 1,
+                  "type": "integer"
                 },
-                "count": { "type": "integer", "minimum": 1 }
+                "item": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "name"],
+                  "type": "object"
+                }
               },
-              "required": ["item", "count"]
-            }
+              "required": ["item", "count"],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "traderStanding": {
+            "description": "Trader reputation rewards",
+            "items": {
+              "properties": {
+                "standing": {
+                  "type": "number"
+                },
+                "trader": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["name"],
+                  "type": "object"
+                }
+              },
+              "required": ["trader", "standing"],
+              "type": "object"
+            },
+            "type": "array"
           }
-        }
+        },
+        "type": "object"
+      },
+      "kappaRequired": {
+        "description": "Whether task is required for Kappa container",
+        "type": "boolean"
+      },
+      "lightkeeperRequired": {
+        "description": "Whether task is required for Lightkeeper access",
+        "type": "boolean"
+      },
+      "map": {
+        "additionalProperties": false,
+        "description": "Map where the task takes place",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "name"],
+        "type": "object"
+      },
+      "minPlayerLevel": {
+        "description": "Minimum PMC level required to start the task",
+        "maximum": 79,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "name": {
+        "description": "Task name override",
+        "type": "string"
+      },
+      "objectives": {
+        "additionalProperties": {
+          "additionalProperties": true,
+          "properties": {
+            "containsAll": {
+              "items": {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "shortName": {
+                    "type": "string"
+                  }
+                },
+                "required": ["id", "name"],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "count": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "description": {
+              "type": "string"
+            },
+            "foundInRaid": {
+              "type": "boolean"
+            },
+            "item": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "shortName": {
+                  "type": "string"
+                }
+              },
+              "required": ["id", "name"],
+              "type": "object"
+            },
+            "items": {
+              "items": {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "shortName": {
+                    "type": "string"
+                  }
+                },
+                "required": ["id", "name"],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "maps": {
+              "items": {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": ["id", "name"],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "markerItem": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "shortName": {
+                  "type": "string"
+                }
+              },
+              "required": ["id", "name"],
+              "type": "object"
+            },
+            "questItem": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "shortName": {
+                  "type": "string"
+                }
+              },
+              "required": ["id", "name"],
+              "type": "object"
+            },
+            "requiredKeys": {
+              "items": {
+                "items": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "shortName": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "name"],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "type": "array"
+            },
+            "useAny": {
+              "items": {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "shortName": {
+                    "type": "string"
+                  }
+                },
+                "required": ["id", "name"],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "usingWeapon": {
+              "items": {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "shortName": {
+                    "type": "string"
+                  }
+                },
+                "required": ["id", "name"],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "usingWeaponMods": {
+              "items": {
+                "items": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "shortName": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "name"],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "description": "ID-keyed objective patches",
+        "type": "object"
+      },
+      "taskRequirements": {
+        "description": "Task prerequisites/requirements",
+        "items": {
+          "additionalProperties": true,
+          "properties": {
+            "task": {
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": ["id", "name"],
+              "type": "object"
+            }
+          },
+          "required": ["task"],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "wikiLink": {
+        "description": "Corrected wiki link URL",
+        "type": "string"
       }
     },
-    "additionalProperties": true
-  }
+    "type": "object"
+  },
+  "description": "Schema for task corrections in tarkov-data-overlay",
+  "title": "Task Override",
+  "type": "object"
 }

@@ -5,9 +5,9 @@
  * Separates API concerns from validation and presentation logic.
  */
 
-import type { TaskData } from './types.js';
+import type { TaskData } from "./types.js";
 
-const TARKOV_API = 'https://api.tarkov.dev/graphql';
+const TARKOV_API = "https://api.tarkov.dev/graphql";
 
 /**
  * GraphQL query for fetching all tasks with their details
@@ -19,6 +19,11 @@ const TASKS_QUERY = `
       name
       minPlayerLevel
       wikiLink
+      map {
+        id
+        name
+      }
+      experience
       taskRequirements {
         task {
           id
@@ -28,18 +33,52 @@ const TASKS_QUERY = `
       }
       objectives {
         id
+        type
+        description
+        maps {
+          id
+          name
+        }
+        ... on TaskObjectiveBasic {
+          requiredKeys { id name shortName }
+        }
+        ... on TaskObjectiveMark {
+          markerItem { id name shortName }
+          requiredKeys { id name shortName }
+        }
+        ... on TaskObjectiveExtract {
+          requiredKeys { id name shortName }
+        }
         ... on TaskObjectiveShoot {
           count
+          usingWeapon { id name shortName }
+          usingWeaponMods { id name shortName }
+          requiredKeys { id name shortName }
         }
         ... on TaskObjectiveItem {
           count
+          items { id name shortName }
+          foundInRaid
+          requiredKeys { id name shortName }
         }
         ... on TaskObjectiveQuestItem {
           count
+          questItem { id name shortName }
+          requiredKeys { id name shortName }
         }
         ... on TaskObjectiveUseItem {
           count
+          useAny { id name shortName }
+          requiredKeys { id name shortName }
         }
+        ... on TaskObjectiveBuildItem {
+          item { id name shortName }
+          containsAll { id name shortName }
+        }
+      }
+      finishRewards {
+        items { item { id name shortName } count }
+        traderStanding { trader { id name } standing }
       }
     }
   }
@@ -50,13 +89,15 @@ const TASKS_QUERY = `
  */
 async function executeQuery<T>(query: string): Promise<T> {
   const response = await fetch(TARKOV_API, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query }),
   });
 
   if (!response.ok) {
-    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+    throw new Error(
+      `API request failed: ${response.status} ${response.statusText}`
+    );
   }
 
   const result = await response.json();
@@ -79,6 +120,9 @@ export async function fetchTasks(): Promise<TaskData[]> {
 /**
  * Find a task by ID from a list of tasks
  */
-export function findTaskById(tasks: TaskData[], taskId: string): TaskData | undefined {
-  return tasks.find(t => t.id === taskId);
+export function findTaskById(
+  tasks: TaskData[],
+  taskId: string
+): TaskData | undefined {
+  return tasks.find((t) => t.id === taskId);
 }

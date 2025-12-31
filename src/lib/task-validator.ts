@@ -19,6 +19,63 @@ type FieldValidator = (
   apiTask: TaskData
 ) => ValidationDetail | null;
 
+function sortKey(value: unknown): string {
+  if (value === undefined) return 'undefined';
+  if (value === null) return 'null';
+  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+    return String(value);
+  }
+  const json = JSON.stringify(value);
+  return json ?? String(value);
+}
+
+function normalizeValue(value: unknown): unknown {
+  if (Array.isArray(value)) {
+    const normalized = value.map(normalizeValue);
+    return normalized
+      .map(item => ({ key: sortKey(item), value: item }))
+      .sort((a, b) => a.key.localeCompare(b.key))
+      .map(item => item.value);
+  }
+
+  if (value && typeof value === 'object') {
+    const obj = value as Record<string, unknown>;
+    const keys = Object.keys(obj).sort();
+    const normalized: Record<string, unknown> = {};
+    for (const key of keys) {
+      normalized[key] = normalizeValue(obj[key]);
+    }
+    return normalized;
+  }
+
+  return value;
+}
+
+function valuesEqual(a: unknown, b: unknown): boolean {
+  if (a === undefined && b === undefined) return true;
+  return JSON.stringify(normalizeValue(a)) === JSON.stringify(normalizeValue(b));
+}
+
+function compareSubset(overrideValue: unknown, apiValue: unknown): boolean {
+  if (overrideValue === undefined) return true;
+  if (overrideValue === null || typeof overrideValue !== 'object' || Array.isArray(overrideValue)) {
+    return valuesEqual(overrideValue, apiValue);
+  }
+
+  if (!apiValue || typeof apiValue !== 'object' || Array.isArray(apiValue)) return false;
+
+  const overrideObject = overrideValue as Record<string, unknown>;
+  const apiObject = apiValue as Record<string, unknown>;
+
+  for (const key of Object.keys(overrideObject)) {
+    if (!compareSubset(overrideObject[key], apiObject[key])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 /**
  * Create a simple field comparison validator
  */
@@ -30,7 +87,7 @@ function createFieldValidator<K extends keyof TaskOverride & keyof TaskData>(
     if (overrideValue === undefined) return null;
 
     const apiValue = apiTask[field];
-    const isMatch = JSON.stringify(apiValue) === JSON.stringify(overrideValue);
+    const isMatch = compareSubset(overrideValue, apiValue);
 
     return {
       field,
@@ -98,6 +155,9 @@ const FIELD_VALIDATORS: FieldValidator[] = [
   createFieldValidator('minPlayerLevel'),
   createFieldValidator('name'),
   createFieldValidator('wikiLink'),
+  createFieldValidator('map'),
+  createFieldValidator('experience'),
+  createFieldValidator('finishRewards'),
   validateTaskRequirements,
 ];
 
@@ -165,18 +225,19 @@ export function validateTaskOverride(
           status: 'check',
           message: `objective ${objId}: Not found in API - CHECK MANUALLY`,
         });
-      } else if (objOverride.count !== undefined && apiObj.count !== objOverride.count) {
-        details.push({
-          field: `objective:${objId}:count`,
-          status: 'needed',
-          message: `objective count: API=${apiObj.count}, Override=${objOverride.count} - STILL NEEDED`,
-        });
-      } else if (objOverride.count !== undefined) {
-        details.push({
-          field: `objective:${objId}:count`,
-          status: 'fixed',
-          message: `objective count: ${apiObj.count} - FIXED IN API`,
-        });
+      } else {
+        for (const [field, overrideValue] of Object.entries(objOverride)) {
+          if (overrideValue === undefined) continue;
+          const apiValue = (apiObj as Record<string, unknown>)[field];
+          const isMatch = compareSubset(overrideValue, apiValue);
+          details.push({
+            field: `objective:${objId}:${field}`,
+            status: isMatch ? 'fixed' : 'needed',
+            message: isMatch
+              ? `objective ${field}: ${formatValue(apiValue)} - FIXED IN API`
+              : `objective ${field}: API=${formatValue(apiValue)}, Override=${formatValue(overrideValue)} - STILL NEEDED`,
+          });
+        }
       }
     }
   }
