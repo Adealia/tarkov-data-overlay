@@ -20,5 +20,13 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd ${{ secrets.SSH_PROJECT_PATH }}
-            git pull
-            pm2 restart monitor
+            git fetch origin prod  
+            git reset --hard origin/prod  
+            npm ci --production  
+            if pm2 describe monitor > /dev/null 2>&1; then  
+              pm2 restart monitor  
+            else  
+              pm2 start monitor/server.js --name monitor  
+            fi  
+            sleep 3  
+            pm2 describe monitor || (echo "Monitor failed to start" && exit 1)  
