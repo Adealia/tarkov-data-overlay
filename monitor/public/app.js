@@ -1,6 +1,5 @@
 const statusEl = document.getElementById("status");
 const updatedEl = document.getElementById("updated");
-const pathEl = document.getElementById("path");
 const emptyEl = document.getElementById("empty");
 const sectionsEl = document.getElementById("sections");
 const titleEl = document.getElementById("page-title");
@@ -117,10 +116,6 @@ function updateStatus(state) {
   if (state.updatedAt) {
     const updatedDate = new Date(state.updatedAt);
     updatedEl.textContent = `Last update: ${updatedDate.toLocaleString()}`;
-  }
-
-  if (state.filePath) {
-    pathEl.textContent = state.filePath;
   }
 
   renderSections(state.sections);
