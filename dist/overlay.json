@@ -278,6 +278,19 @@
         }
       }
     },
+    "67a0966817e34930e500754c": {
+      "disabled": true
+    },
+    "67a0970744893b9f3f0d9b68": {
+      "taskRequirements": [
+        {
+          "task": {
+            "id": "67a096577e86e067eb045733",
+            "name": "Hidden Layer"
+          }
+        }
+      ]
+    },
     "60e71b62a0beca400d69efc4": {
       "minPlayerLevel": 46
     },
@@ -1234,7 +1247,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-01-07T08:26:58.636Z",
-    "sha256": "491e1797a4e9223075346cc444431227fae431d8a371493fb008f5eaa50233cd"
+    "generated": "2026-01-09T05:23:45.980Z",
+    "sha256": "fc97296d1f53f0ef023d531d33b80f33f64496025bbeff1dd4287d84aab492cc"
   }
 }

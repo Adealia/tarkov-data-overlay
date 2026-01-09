@@ -318,6 +318,25 @@
     },
   },
 
+  // Forced Alliance - Task removed from standard gameplay
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Forced_Alliance
+  "67a0966817e34930e500754c": {
+    disabled: true, // Was: undefined
+  },
+
+  // Offensive Reconnaissance - Prerequisite should be Hidden Layer
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Offensive_Reconnaissance
+  "67a0970744893b9f3f0d9b68": {
+    taskRequirements: [
+      {
+        task: {
+          id: "67a096577e86e067eb045733",
+          name: "Hidden Layer",
+        },
+      },
+    ], // Was: Forced Alliance (67a0966817e34930e500754c)
+  },
+
   // Escort - Level requirement incorrect
   // Proof: https://escapefromtarkov.fandom.com/wiki/Escort
   // User confirmed: level 46 required, not 60
