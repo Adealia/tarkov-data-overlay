@@ -810,15 +810,15 @@
           },
         },
       ],
-      // Unlocks purchase of AS VAL MOD.4 at Mechanic LL4.
+      // Unlocks purchase of AS VAL MOD.4 (Default) at Mechanic LL4.
       offerUnlock: [
         {
           trader: { id: '5a7c2eca46aef81a7ca2145d', name: 'Mechanic' },
           level: 4,
           item: {
-            id: '6871284e9a353bb50606f3ed',
-            name: 'AS VAL MOD.4 9x39 special assault rifle',
-            shortName: 'AS VAL MOD.4',
+            id: '68d502e016a16a91e200bbbc',
+            name: 'AS VAL MOD.4 9x39 special assault rifle Default',
+            shortName: 'AS VAL MOD.4 Default',
           },
         },
       ],
