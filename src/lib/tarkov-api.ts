@@ -79,6 +79,7 @@ const TASKS_QUERY = `
       finishRewards {
         items { item { id name shortName } count }
         traderStanding { trader { id name } standing }
+        offerUnlock { id trader { id name } level item { id name shortName } }
       }
     }
   }

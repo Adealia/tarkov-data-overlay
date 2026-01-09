@@ -606,7 +606,7 @@
     id: 'setting_priorities',
     name: 'Setting Priorities',
     wikiLink: 'https://escapefromtarkov.fandom.com/wiki/Setting_Priorities',
-    trader: { id: '5a7c2d2c46aef81a7ca2145d', name: 'Mechanic' },
+    trader: { id: '5a7c2eca46aef81a7ca2145d', name: 'Mechanic' },
     kappaRequired: false,
     factionName: 'Any',
     taskRequirements: [
@@ -669,7 +669,7 @@
       ],
       traderStanding: [
         {
-          trader: { id: '5a7c2d2c46aef81a7ca2145d', name: 'Mechanic' },
+          trader: { id: '5a7c2eca46aef81a7ca2145d', name: 'Mechanic' },
           standing: 0.01,
         },
       ],
@@ -735,7 +735,7 @@
     id: 'goals_and_means',
     name: 'Goals and Means',
     wikiLink: 'https://escapefromtarkov.fandom.com/wiki/Goals_and_Means',
-    trader: { id: '5a7c2d2c46aef81a7ca2145d', name: 'Mechanic' },
+    trader: { id: '5a7c2eca46aef81a7ca2145d', name: 'Mechanic' },
     kappaRequired: false,
     factionName: 'Any',
     taskRequirements: [
@@ -745,8 +745,7 @@
     objectives: [
       {
         id: 'goals_and_means_obj01',
-        description:
-          'Eliminate 20 PMC operatives from over 100 meters away while using any 9x39 caliber weapon',
+        description: 'Eliminate 20 PMC operatives from over 100 meters away while using any 9x39 caliber weapon',
         type: 'shoot',
         count: 20,
         usingWeapon: [
@@ -811,9 +810,21 @@
           },
         },
       ],
+      // Unlocks purchase of AS VAL MOD.4 at Mechanic LL4.
+      offerUnlock: [
+        {
+          trader: { id: '5a7c2eca46aef81a7ca2145d', name: 'Mechanic' },
+          level: 4,
+          item: {
+            id: '6871284e9a353bb50606f3ed',
+            name: 'AS VAL MOD.4 9x39 special assault rifle',
+            shortName: 'AS VAL MOD.4',
+          },
+        },
+      ],
       traderStanding: [
         {
-          trader: { id: '5a7c2d2c46aef81a7ca2145d', name: 'Mechanic' },
+          trader: { id: '5a7c2eca46aef81a7ca2145d', name: 'Mechanic' },
           standing: 0.02,
         },
       ],

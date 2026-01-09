@@ -44,6 +44,50 @@
             },
             "type": "array"
           },
+          "offerUnlock": {
+            "description": "Trader offer unlocks (barter/cash offers)",
+            "items": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "item": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "shortName": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "name"],
+                  "type": "object"
+                },
+                "level": {
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "trader": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["name"],
+                  "type": "object"
+                }
+              },
+              "required": ["trader", "level", "item"],
+              "type": "object"
+            },
+            "type": "array"
+          },
           "traderStanding": {
             "items": {
               "properties": {

@@ -25,6 +25,12 @@ export interface TaskOverride {
 export interface TaskFinishRewards {
   items?: Array<{ item: { id?: string; name: string; shortName?: string }; count: number }>;
   traderStanding?: Array<{ trader: { id?: string; name: string }; standing: number }>;
+  offerUnlock?: Array<{
+    id?: string;
+    trader: { id?: string; name: string };
+    level: number;
+    item: { id?: string; name: string; shortName?: string };
+  }>;
 }
 
 /** Task objective from tarkov.dev API */
