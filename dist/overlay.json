@@ -424,6 +424,30 @@
           ]
         }
       ]
+    },
+    "6615141bfda04449120269a7": {
+      "objectives": {
+        "6615141bfda04449120269a8": {
+          "maps": [
+            {
+              "id": "5704e4dad2720bb55b8b4567",
+              "name": "Lighthouse"
+            }
+          ]
+        }
+      }
+    },
+    "6613f307fca4f2f386029409": {
+      "objectives": {
+        "6615127fd998c5f2aaa4a8a0": {
+          "maps": [
+            {
+              "id": "5704e4dad2720bb55b8b4567",
+              "name": "Lighthouse"
+            }
+          ]
+        }
+      }
     }
   },
   "editions": {
@@ -857,7 +881,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-01-26T06:49:51.903Z",
-    "sha256": "58d2d2365e11b34f7f833f3e0f0fb0dea1139696bf5d50e6dcbb2acd713176b6"
+    "generated": "2026-01-27T17:31:47.430Z",
+    "sha256": "fd57b342e3cb9535fd32f54bf25e3ee90a88c78f71c75157d2e365aa565f9775"
   }
 }
