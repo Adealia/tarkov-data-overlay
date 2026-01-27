@@ -425,6 +425,36 @@
         }
       ]
     },
+    "639135a7e705511c8a4a1b78": {
+      "neededKeys": [
+        {
+          "map": {
+            "id": "5714dc692459777137212e12",
+            "name": "Streets of Tarkov"
+          },
+          "keys": [
+            {
+              "id": "63a39e1d234195315d4020bd",
+              "name": "Primorsky 46-48 skybridge key",
+              "shortName": "Skybridge 46-48"
+            }
+          ]
+        }
+      ],
+      "objectives": {
+        "63a7da6f5199ab1f7d4a774a": {
+          "requiredKeys": [
+            [
+              {
+                "id": "63a39e1d234195315d4020bd",
+                "name": "Primorsky 46-48 skybridge key",
+                "shortName": "Skybridge 46-48"
+              }
+            ]
+          ]
+        }
+      }
+    },
     "6615141bfda04449120269a7": {
       "objectives": {
         "6615141bfda04449120269a8": {
@@ -881,7 +911,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-01-27T17:31:47.430Z",
-    "sha256": "fd57b342e3cb9535fd32f54bf25e3ee90a88c78f71c75157d2e365aa565f9775"
+    "generated": "2026-01-27T17:43:55.043Z",
+    "sha256": "25e22c0b95edb1a2a70f2b459c8fc0fd35c576e12e0f4a1eda641ba610ece184"
   }
 }
