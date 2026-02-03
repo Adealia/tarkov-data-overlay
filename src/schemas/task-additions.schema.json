@@ -346,6 +346,10 @@
         ],
         "description": "Primary map for the task"
       },
+      "maps": {
+        "description": "Not supported. Do not use task-level maps; use task.map (set map: null for multi-map tasks) and objective-level maps instead.",
+        "not": {}
+      },
       "name": {
         "description": "Task name",
         "type": "string"

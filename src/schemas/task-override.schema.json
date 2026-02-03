@@ -340,6 +340,10 @@
         ],
         "description": "Map where the task takes place"
       },
+      "maps": {
+        "description": "Not supported. Do not use task-level maps; use task.map (set map: null for multi-map tasks) and objective-level maps instead.",
+        "not": {}
+      },
       "minPlayerLevel": {
         "description": "Minimum PMC level required to start the task",
         "maximum": 79,
