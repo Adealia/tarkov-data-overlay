@@ -481,6 +481,47 @@
         }
       }
     },
+    "6848100b00afffa81f09e365": {
+      "wikiLink": "https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_3)",
+      "objectives": {
+        "6848116061809d65b8503617": {
+          "exitStatus": [
+            "Survived"
+          ]
+        }
+      },
+      "objectivesAdd": [
+        {
+          "id": "new_beginning_3_obj_transit_lab_streets",
+          "description": "Use the transit from The Lab to Streets of Tarkov",
+          "type": "extract",
+          "maps": [
+            {
+              "id": "5b0fc42d86f7744a585f9105",
+              "name": "The Lab"
+            },
+            {
+              "id": "5714dc692459777137212e12",
+              "name": "Streets of Tarkov"
+            }
+          ],
+          "exitStatus": [
+            "ExpBonusmarathon Name"
+          ],
+          "count": 1
+        }
+      ],
+      "finishRewards": {
+        "traderStanding": [
+          {
+            "trader": {
+              "name": "Ragman"
+            },
+            "standing": 0.1
+          }
+        ]
+      }
+    },
     "6761f28a022f60bb320f3e95": {
       "wikiLink": "https://escapefromtarkov.fandom.com/wiki/New_Beginning_(Prestige_1)",
       "objectives": {
@@ -1124,7 +1165,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-04T09:38:18.270Z",
-    "sha256": "1ea85b80d315a4f1d339f7ac5dc97739c692132aeb8444e713d6256d03d17fc1"
+    "generated": "2026-02-04T10:06:47.375Z",
+    "sha256": "0be4bd7727518da80a18d632ec4286eac7a15e74006cfa55df00a0369635dd84"
   }
 }
