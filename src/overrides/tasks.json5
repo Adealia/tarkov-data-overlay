@@ -639,15 +639,5 @@
         },
       ],
     },
-  },
-  // Was: extract objective missing in API
-    finishRewards: {
-      traderStanding: [
-        {
-          trader: { name: 'Ragman' },
-          standing: 0.1, // Was: 0.01
-        },
-      ],
-    },
   }
 }
