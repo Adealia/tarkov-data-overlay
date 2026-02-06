@@ -66,6 +66,8 @@ const TASKS_QUERY = `
           count
           usingWeapon { id name shortName }
           usingWeaponMods { id name shortName }
+          wearing { id name shortName }
+          notWearing { id name shortName }
           requiredKeys { id name shortName }
         }
         ... on TaskObjectiveItem {
