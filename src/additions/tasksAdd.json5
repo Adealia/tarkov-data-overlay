@@ -1676,7 +1676,7 @@
         optional: false,
         exitStatus: ['ExpBonusmarathon Name'],
         count: 1,
-         },
+      },
       {
         id: 'new_beginning_prestige_6_obj08',
         description: 'Use the transit from Customs to Reserve',
@@ -1890,5 +1890,5 @@
         },
       ],
     },
-  }
+  },
 }
