@@ -576,6 +576,9 @@
           }
         ]
       }
+    },
+    "59689fbd86f7740d137ebfc4": {
+      "kappaRequired": false
     }
   },
   "editions": {
@@ -1862,7 +1865,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-04T10:44:19.886Z",
-    "sha256": "fe966fde642ebd666c16e1ccb8c5d891d3e9c507b054c44ee0b3ef3e43bb5e35"
+    "generated": "2026-02-08T06:00:48.127Z",
+    "sha256": "061a614af903d35f4ad0ad3d03d0ada0fd3398a27b40a7c5be8a13180bc7c4d8"
   }
 }
