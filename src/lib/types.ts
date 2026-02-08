@@ -66,7 +66,7 @@ export interface TaskObjective {
   foundInRaid?: boolean;
   zones?: ObjectiveZone[];
   possibleLocations?: ObjectivePossibleLocation[];
-  wearing?: TaskItemRef[];
+  wearing?: Array<TaskItemRef[]>;
   notWearing?: TaskItemRef[];
   minDurability?: number;
   maxDurability?: number;

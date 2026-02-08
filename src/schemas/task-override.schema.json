@@ -646,13 +646,16 @@
             "wearing": {
               "description": "Items that must be worn",
               "items": {
-                "properties": {
-                  "id": { "type": "string" },
-                  "name": { "type": "string" },
-                  "shortName": { "type": "string" }
+                "items": {
+                  "properties": {
+                    "id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "shortName": { "type": "string" }
+                  },
+                  "required": ["id", "name"],
+                  "type": "object"
                 },
-                "required": ["id", "name"],
-                "type": "object"
+                "type": "array"
               },
               "type": "array"
             },
@@ -984,6 +987,47 @@
                   "type": "object"
                 },
                 "type": "array"
+              },
+              "type": "array"
+            },
+            "wearing": {
+              "description": "Items that must be worn",
+              "items": {
+                "items": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "shortName": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "name"],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "type": "array"
+            },
+            "notWearing": {
+              "description": "Items that must not be worn",
+              "items": {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "shortName": {
+                    "type": "string"
+                  }
+                },
+                "required": ["id", "name"],
+                "type": "object"
               },
               "type": "array"
             }

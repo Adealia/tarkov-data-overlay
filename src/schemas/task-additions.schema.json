@@ -663,14 +663,17 @@
             "wearing": {
               "description": "Items that must be worn",
               "items": {
-                "additionalProperties": false,
-                "properties": {
-                  "id": { "type": "string" },
-                  "name": { "type": "string" },
-                  "shortName": { "type": "string" }
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "shortName": { "type": "string" }
+                  },
+                  "required": ["id", "name"],
+                  "type": "object"
                 },
-                "required": ["id", "name"],
-                "type": "object"
+                "type": "array"
               },
               "type": "array"
             },
