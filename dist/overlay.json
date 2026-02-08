@@ -579,6 +579,122 @@
     },
     "59689fbd86f7740d137ebfc4": {
       "kappaRequired": false
+    },
+    "5c1234c286f77406fa13baeb": {
+      "objectives": {
+        "5c1fa9c986f7740de474cb3d": {
+          "wearing": [
+            [
+              {
+                "id": "572b7adb24597762ae139821",
+                "name": "Scav Vest",
+                "shortName": "Scav Vest"
+              },
+              {
+                "id": "59e7708286f7742cbd762753",
+                "name": "Ushanka ear flap hat",
+                "shortName": "Ushanka"
+              }
+            ],
+            [
+              {
+                "id": "572b7adb24597762ae139821",
+                "name": "Scav Vest",
+                "shortName": "Scav Vest"
+              },
+              {
+                "id": "6937f02dfd6488bb27024839",
+                "name": "Domontovich ushanka hat",
+                "shortName": "Domont"
+              }
+            ],
+            [
+              {
+                "id": "572b7adb24597762ae139821",
+                "name": "Scav Vest",
+                "shortName": "Scav Vest"
+              },
+              {
+                "id": "6937efd50543dcc2560a2c81",
+                "name": "New Year ushanka hat",
+                "shortName": "Ushanka"
+              }
+            ],
+            [
+              {
+                "id": "693fd1200ec97e98040bd3f9",
+                "name": "Tac-Kek JayPC plate carrier (Black)",
+                "shortName": "JayPC"
+              },
+              {
+                "id": "59e7708286f7742cbd762753",
+                "name": "Ushanka ear flap hat",
+                "shortName": "Ushanka"
+              }
+            ],
+            [
+              {
+                "id": "693fd1200ec97e98040bd3f9",
+                "name": "Tac-Kek JayPC plate carrier (Black)",
+                "shortName": "JayPC"
+              },
+              {
+                "id": "6937f02dfd6488bb27024839",
+                "name": "Domontovich ushanka hat",
+                "shortName": "Domont"
+              }
+            ],
+            [
+              {
+                "id": "693fd1200ec97e98040bd3f9",
+                "name": "Tac-Kek JayPC plate carrier (Black)",
+                "shortName": "JayPC"
+              },
+              {
+                "id": "6937efd50543dcc2560a2c81",
+                "name": "New Year ushanka hat",
+                "shortName": "Ushanka"
+              }
+            ],
+            [
+              {
+                "id": "693fd13aa490096a05028cc8",
+                "name": "Tac-Kek JayPC plate carrier (OD Green)",
+                "shortName": "JayPC"
+              },
+              {
+                "id": "59e7708286f7742cbd762753",
+                "name": "Ushanka ear flap hat",
+                "shortName": "Ushanka"
+              }
+            ],
+            [
+              {
+                "id": "693fd13aa490096a05028cc8",
+                "name": "Tac-Kek JayPC plate carrier (OD Green)",
+                "shortName": "JayPC"
+              },
+              {
+                "id": "6937f02dfd6488bb27024839",
+                "name": "Domontovich ushanka hat",
+                "shortName": "Domont"
+              }
+            ],
+            [
+              {
+                "id": "693fd13aa490096a05028cc8",
+                "name": "Tac-Kek JayPC plate carrier (OD Green)",
+                "shortName": "JayPC"
+              },
+              {
+                "id": "6937efd50543dcc2560a2c81",
+                "name": "New Year ushanka hat",
+                "shortName": "Ushanka"
+              }
+            ]
+          ]
+        }
+      }
     }
   },
   "editions": {
@@ -1885,7 +2001,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-08T06:02:33.758Z",
-    "sha256": "b660b4474f10ab5fd7ac58100248bca6308169cbc2e27023bcfaf4d5473ab850"
+    "generated": "2026-02-08T06:05:39.606Z",
+    "sha256": "b8164f0f47cbccee9f75203ff782c2680b505377f48e851922c92b5e4fb14426"
   }
 }
