@@ -1281,7 +1281,7 @@
       id: '5ac3b934156ae10c4430e83c',
       name: 'Ragman',
     },
-    minPlayerLevel: 55,
+    minPlayerLevel: 47, // Was: 55
     requiredPrestige: {
       name: 'Prestige 4',
       prestigeLevel: 4,
