@@ -695,6 +695,14 @@
           ]
         }
       }
+    },
+    "5d25e4ca86f77409dd5cdf2c": {
+      "objectives": {
+        "5fd8aa3206fb3a6b8154a2c3": {
+          "description": "Locate and neutralize Shturman with a headshot from over 40 meters away while using an M700 sniper rifle with the specified scope",
+          "distance": 40
+        }
+      }
     }
   },
   "editions": {
@@ -2002,7 +2010,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-10T13:52:29.821Z",
-    "sha256": "5eb32f4e54b630cefb4460152c9ded9ec81080ec3f5fbe5a1b8f24edb40b5b46"
+    "generated": "2026-02-10T13:53:20.029Z",
+    "sha256": "0e207f9837d95ee028b79c8f6db85ad71864651673734f1edb26cd14d89894f3"
   }
 }
