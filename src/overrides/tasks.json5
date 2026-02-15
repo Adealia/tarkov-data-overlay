@@ -650,6 +650,12 @@
   '59689fbd86f7740d137ebfc4': {
     kappaRequired: false, // Was: true
   },
+  // Operation Aquarius - Part 2 - Kappa requirement incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Operation_Aquarius_-_Part_2
+  // Wiki task infobox shows reqkappa: No
+  '5968eb3186f7741dde183a4d': {
+    kappaRequired: false, // Was: true
+  },
 
   // Setup - Objective wearing gear variants missing
   // Proof: https://escapefromtarkov.fandom.com/wiki/Setup
