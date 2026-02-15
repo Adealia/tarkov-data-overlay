@@ -274,8 +274,8 @@ async function fetchTasksForMode(mode: GameMode): Promise<ExtendedTaskData[]> {
 }
 
 /**
- * Fetch tasks from both game modes and deduplicate by wikiLink.
- * Tasks with the same wikiLink are merged, tracking which modes they belong to.
+ * Fetch tasks from one or both game modes.
+ * In `both` mode, retain mode-specific task entries so PvE-specific data is not lost.
  */
 async function fetchExtendedTasks(
   gameMode: 'regular' | 'pve' | 'both' = 'both'
@@ -284,36 +284,20 @@ async function fetchExtendedTasks(
     return fetchTasksForMode(gameMode);
   }
 
-  // Fetch both modes
+  // Fetch both modes and retain separate entries per wikiLink + mode.
   const [regularTasks, pveTasks] = await Promise.all([
     fetchTasksForMode('regular'),
     fetchTasksForMode('pve'),
   ]);
 
-  // Deduplicate by wikiLink, merging game modes
-  const byWikiLink = new Map<string, ExtendedTaskData>();
-
-  for (const task of regularTasks) {
-    if (task.wikiLink) {
-      byWikiLink.set(task.wikiLink, task);
-    } else {
-      // Tasks without wikiLink - use ID as key
-      byWikiLink.set(`id:${task.id}`, task);
-    }
+  const byWikiLinkAndMode = new Map<string, ExtendedTaskData>();
+  for (const task of [...regularTasks, ...pveTasks]) {
+    const mode = task.gameModes?.[0] ?? 'regular';
+    const key = `${task.wikiLink || `id:${task.id}`}|${mode}`;
+    byWikiLinkAndMode.set(key, task);
   }
 
-  for (const task of pveTasks) {
-    const key = task.wikiLink || `id:${task.id}`;
-    const existing = byWikiLink.get(key);
-    if (existing) {
-      // Merge game modes
-      existing.gameModes = [...(existing.gameModes || []), 'pve'];
-    } else {
-      byWikiLink.set(key, task);
-    }
-  }
-
-  return Array.from(byWikiLink.values());
+  return Array.from(byWikiLinkAndMode.values());
 }
 
 function sleep(ms: number): Promise<void> {
@@ -931,12 +915,22 @@ function extractSectionLines(wikitext: string, heading: string): string[] {
   if (startIndex === -1) return [];
 
   const items: string[] = [];
+  const isTopLevelHeading = (line: string): boolean => {
+    const trimmed = line.trim();
+    return (
+      trimmed.startsWith('==') &&
+      !trimmed.startsWith('===') &&
+      trimmed.endsWith('==') &&
+      !trimmed.endsWith('===')
+    );
+  };
+
   for (let i = startIndex + 1; i < lines.length; i += 1) {
     const raw = lines[i].trim();
-    if (raw.startsWith('==')) break;
-    // Capture bullet points
-    if (raw.startsWith('*')) {
-      items.push(raw.replace(/^\*+\s*/, ''));
+    if (isTopLevelHeading(raw)) break;
+    // Capture bulleted and numbered list entries.
+    if (/^[*#]/.test(raw)) {
+      items.push(raw.replace(/^[*#]+\s*/, ''));
       continue;
     }
     // Also capture Note lines (for PvE/PvP differences)
@@ -3067,6 +3061,7 @@ async function runBulkMode(
   let checked = 0;
   let errors = 0;
   let cacheHits = 0;
+  const failedTasks: Array<{ id: string; name: string; reason: string }> = [];
 
   for (const task of tasksWithWiki) {
     checked += 1;
@@ -3112,8 +3107,13 @@ async function runBulkMode(
         nextTaskMap
       );
       allDiscrepancies.push(...discrepancies);
-    } catch {
+    } catch (error) {
       errors += 1;
+      const reason = error instanceof Error ? error.message : String(error);
+      failedTasks.push({ id: task.id, name: task.name, reason });
+      process.stderr.write(
+        `\n${icons.error} ${task.name} (${task.id}) failed: ${reason}\n`
+      );
     }
   }
 
@@ -3123,6 +3123,15 @@ async function runBulkMode(
   console.log(`Wiki cache hits: ${cacheHits}`);
   console.log(`Wiki errors: ${errors}`);
   console.log(`Total discrepancies found: ${allDiscrepancies.length}`);
+  if (failedTasks.length > 0) {
+    console.log('Failed tasks:');
+    for (const failed of failedTasks.slice(0, 10)) {
+      console.log(`  - ${failed.name} (${failed.id}): ${failed.reason}`);
+    }
+    if (failedTasks.length > 10) {
+      console.log(`  ...and ${failedTasks.length - 10} more`);
+    }
+  }
 
   // Filter out suppressed discrepancies (overlay corrections + wiki-incorrect)
   const newDiscrepancies = allDiscrepancies.filter((d) => {
@@ -3455,7 +3464,7 @@ async function main(): Promise<void> {
   const gameMode = options.gameMode ?? 'both';
   const modeLabel =
     gameMode === 'both'
-      ? 'PVP + PVE (deduplicated)'
+      ? 'PVP + PVE (mode-specific)'
       : gameMode === 'regular'
       ? 'PVP only'
       : 'PVE only';

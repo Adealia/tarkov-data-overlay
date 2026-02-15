@@ -15,6 +15,7 @@
  */
 
 import { join } from 'path';
+import { pathToFileURL } from 'url';
 import {
   getProjectPaths,
   loadJson5File,
@@ -132,9 +133,26 @@ type EditionTaskReference = {
   kind: 'exclusive' | 'excluded';
 };
 
-function normalizeWikiLink(link?: string): string | undefined {
+export function normalizeWikiLink(link?: string): string | undefined {
   if (!link) return undefined;
-  return link.trim().toLowerCase().replace(/\/$/, '');
+  const trimmed = link.trim();
+  if (!trimmed) return undefined;
+
+  try {
+    const parsed = new URL(trimmed);
+    const protocol =
+      parsed.protocol === 'http:' || parsed.protocol === 'https:'
+        ? 'https:'
+        : parsed.protocol;
+    const host = parsed.hostname.toLowerCase().replace(/^www\./, '');
+    const pathname =
+      parsed.pathname.replace(/\/+$/, '') === ''
+        ? '/'
+        : parsed.pathname.replace(/\/+$/, '');
+    return `${protocol}//${host}${pathname}`.toLowerCase();
+  } catch {
+    return trimmed.toLowerCase().replace(/\/+$/, '');
+  }
 }
 
 function normalizeName(name: string): string {
@@ -483,4 +501,12 @@ async function main(): Promise<void> {
   }
 }
 
-main();
+function isDirectExecution(): boolean {
+  const entryFile = process.argv[1];
+  if (!entryFile) return false;
+  return import.meta.url === pathToFileURL(entryFile).href;
+}
+
+if (isDirectExecution()) {
+  main();
+}

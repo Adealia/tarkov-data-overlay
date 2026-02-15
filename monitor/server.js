@@ -91,7 +91,21 @@ function normalizeRemoteUrl(input) {
 
 function fetchRemoteText(url) {
   return new Promise((resolve, reject) => {
-    const request = https.get(url, (res) => {
+    let client = https;
+    try {
+      const parsedUrl = new URL(url);
+      if (parsedUrl.protocol === "http:") {
+        client = http;
+      } else if (parsedUrl.protocol !== "https:") {
+        reject(new Error(`Unsupported URL protocol: ${parsedUrl.protocol}`));
+        return;
+      }
+    } catch (error) {
+      reject(error);
+      return;
+    }
+
+    const request = client.get(url, (res) => {
       if (res.statusCode && res.statusCode >= 400) {
         reject(new Error(`HTTP ${res.statusCode}`));
         res.resume();

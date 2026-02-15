@@ -19,6 +19,10 @@ type FieldValidator = (
   apiTask: TaskData
 ) => ValidationDetail | null;
 
+type CompareOptions = {
+  arrayMode?: 'exact' | 'subset';
+};
+
 function sortKey(value: unknown): string {
   if (value === undefined) return 'undefined';
   if (value === null) return 'null';
@@ -56,10 +60,38 @@ function valuesEqual(a: unknown, b: unknown): boolean {
   return JSON.stringify(normalizeValue(a)) === JSON.stringify(normalizeValue(b));
 }
 
-function compareSubset(overrideValue: unknown, apiValue: unknown): boolean {
+function compareSubset(
+  overrideValue: unknown,
+  apiValue: unknown,
+  options: CompareOptions = {}
+): boolean {
   if (overrideValue === undefined) return true;
-  if (overrideValue === null || typeof overrideValue !== 'object' || Array.isArray(overrideValue)) {
+  if (overrideValue === null || typeof overrideValue !== 'object') {
     return valuesEqual(overrideValue, apiValue);
+  }
+
+  if (Array.isArray(overrideValue)) {
+    if (!Array.isArray(apiValue)) return false;
+    if (options.arrayMode !== 'subset') {
+      return valuesEqual(overrideValue, apiValue);
+    }
+    if (overrideValue.length === 0) return true;
+
+    const usedApiIndexes = new Set<number>();
+    for (const overrideEntry of overrideValue) {
+      let matched = false;
+      for (let i = 0; i < apiValue.length; i += 1) {
+        if (usedApiIndexes.has(i)) continue;
+        if (compareSubset(overrideEntry, apiValue[i], options)) {
+          usedApiIndexes.add(i);
+          matched = true;
+          break;
+        }
+      }
+      if (!matched) return false;
+    }
+
+    return true;
   }
 
   if (!apiValue || typeof apiValue !== 'object' || Array.isArray(apiValue)) return false;
@@ -68,7 +100,7 @@ function compareSubset(overrideValue: unknown, apiValue: unknown): boolean {
   const apiObject = apiValue as Record<string, unknown>;
 
   for (const key of Object.keys(overrideObject)) {
-    if (!compareSubset(overrideObject[key], apiObject[key])) {
+    if (!compareSubset(overrideObject[key], apiObject[key], options)) {
       return false;
     }
   }
@@ -119,14 +151,15 @@ function hasMultipleObjectiveMaps(override: TaskOverride, apiTask: TaskData): bo
  * Create a simple field comparison validator
  */
 function createFieldValidator<K extends keyof TaskOverride & keyof TaskData>(
-  field: K
+  field: K,
+  compareOptions?: CompareOptions
 ): FieldValidator {
   return (override, apiTask) => {
     const overrideValue = override[field];
     if (overrideValue === undefined) return null;
 
     const apiValue = apiTask[field];
-    const isMatch = compareSubset(overrideValue, apiValue);
+    const isMatch = compareSubset(overrideValue, apiValue, compareOptions);
 
     return {
       field,
@@ -259,14 +292,14 @@ const FIELD_VALIDATORS: FieldValidator[] = [
   createFieldValidator('wikiLink'),
   validateMap,
   createFieldValidator('experience'),
-  createFieldValidator('startRewards'),
-  createFieldValidator('finishRewards'),
+  createFieldValidator('startRewards', { arrayMode: 'subset' }),
+  createFieldValidator('finishRewards', { arrayMode: 'subset' }),
   createFieldValidator('factionName'),
   createFieldValidator('requiredPrestige'),
   createFieldValidator('kappaRequired'),
   createFieldValidator('lightkeeperRequired'),
   validateTaskRequirements,
-  createFieldValidator('traderRequirements'),
+  createFieldValidator('traderRequirements', { arrayMode: 'subset' }),
 ];
 
 /**

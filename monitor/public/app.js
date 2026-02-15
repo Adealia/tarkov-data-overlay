@@ -27,11 +27,11 @@ const typeMap = {
 };
 
 function getPageType() {
-  const path = window.location.pathname.replace("/", "");
-  if (!path) {
+  const [segment] = window.location.pathname.split("/").filter(Boolean);
+  if (!segment) {
     return "tasks";
   }
-  return typeMap[path] ? path : "tasks";
+  return typeMap[segment] ? segment : "tasks";
 }
 
 const pageType = getPageType();
@@ -51,6 +51,10 @@ if (navEl) {
 }
 
 function renderSections(sections) {
+  if (!sectionsEl || !emptyEl) {
+    return;
+  }
+
   sectionsEl.innerHTML = "";
   let hasRows = false;
 
@@ -104,7 +108,7 @@ function renderSections(sections) {
 }
 
 function updateStatus(state) {
-  if (!state) {
+  if (!state || !statusEl) {
     return;
   }
   if (state.error) {
@@ -113,7 +117,7 @@ function updateStatus(state) {
     statusEl.textContent = "Synced";
   }
 
-  if (state.updatedAt) {
+  if (state.updatedAt && updatedEl) {
     const updatedDate = new Date(state.updatedAt);
     updatedEl.textContent = `Last update: ${updatedDate.toLocaleString()}`;
   }
@@ -130,7 +134,9 @@ async function fetchLatest() {
     const data = await response.json();
     updateStatus(data);
   } catch (error) {
-    statusEl.textContent = "Load error";
+    if (statusEl) {
+      statusEl.textContent = "Load error";
+    }
   }
 }
 
@@ -154,7 +160,9 @@ function connectEvents() {
     updateStatus(JSON.parse(event.data));
   });
   source.onerror = () => {
-    statusEl.textContent = "Connection lost";
+    if (statusEl) {
+      statusEl.textContent = "Connection lost";
+    }
     source.close();
     startPolling();
     fetchLatest();
@@ -162,7 +170,9 @@ function connectEvents() {
   return true;
 }
 
-fetchLatest();
-if (!connectEvents()) {
-  startPolling();
+if (statusEl && updatedEl && emptyEl && sectionsEl) {
+  fetchLatest();
+  if (!connectEvents()) {
+    startPolling();
+  }
 }

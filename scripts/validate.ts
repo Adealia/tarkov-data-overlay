@@ -7,6 +7,7 @@
 
 import Ajv from 'ajv';
 import { join, basename } from 'path';
+import { pathToFileURL } from 'url';
 import {
   getProjectPaths,
   loadJson5File,
@@ -24,7 +25,7 @@ type ValidatorCache = Map<string, ReturnType<Ajv['compile']>>;
 /**
  * Initialize AJV and compile schemas
  */
-function initializeValidators(): ValidatorCache {
+export function initializeValidators(): ValidatorCache {
   const ajv = new Ajv({ allErrors: true, strict: false });
   const cache: ValidatorCache = new Map();
 
@@ -39,7 +40,7 @@ function initializeValidators(): ValidatorCache {
 /**
  * Get the validator for a given filename
  */
-function getValidator(
+export function getValidator(
   filename: string,
   validators: ValidatorCache
 ): ReturnType<Ajv['compile']> | null {
@@ -54,7 +55,7 @@ function getValidator(
 /**
  * Validate a single file against its schema
  */
-function validateFile(
+export function validateFile(
   filePath: string,
   displayPath: string,
   validators: ValidatorCache
@@ -94,7 +95,7 @@ function validateFile(
 /**
  * Validate all source files
  */
-function validateSourceFiles(): SchemaValidationResult[] {
+export function validateSourceFiles(): SchemaValidationResult[] {
   const validators = initializeValidators();
   const results: SchemaValidationResult[] = [];
 
@@ -118,7 +119,7 @@ function validateSourceFiles(): SchemaValidationResult[] {
 /**
  * Print validation results
  */
-function printResults(results: SchemaValidationResult[]): boolean {
+export function printResults(results: SchemaValidationResult[]): boolean {
   let hasErrors = false;
 
   for (const result of results) {
@@ -139,7 +140,7 @@ function printResults(results: SchemaValidationResult[]): boolean {
 /**
  * Main entry point
  */
-function main(): void {
+export function main(): void {
   console.log('Validating source files...\n');
 
   const results = validateSourceFiles();
@@ -155,4 +156,12 @@ function main(): void {
   }
 }
 
-main();
+function isDirectExecution(): boolean {
+  const entryFile = process.argv[1];
+  if (!entryFile) return false;
+  return import.meta.url === pathToFileURL(entryFile).href;
+}
+
+if (isDirectExecution()) {
+  main();
+}

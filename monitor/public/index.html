@@ -4,9 +4,36 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tarkov Data Overlay Monitor</title>
-    <meta http-equiv="refresh" content="0; url=/tasks-corrections.html" />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <p>If you are not redirected, go to <a href="/tasks-corrections.html">Task Corrections</a>.</p>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Overlay Monitor</p>
+          <h1 id="page-title">Tasks</h1>
+          <p id="page-lede" class="lede">Task corrections.</p>
+        </div>
+        <div class="meta">
+          <div id="status" class="status">Connecting...</div>
+          <div id="updated" class="updated">Last update: n/a</div>
+        </div>
+      </header>
+
+      <nav id="nav" class="nav">
+        <a href="/tasks" data-type="tasks">Tasks</a>
+        <a href="/hideout" data-type="hideout">Hideout</a>
+        <a href="/items" data-type="items">Items</a>
+        <a href="/traders" data-type="traders">Traders</a>
+      </nav>
+
+      <main>
+        <section class="content">
+          <p id="empty" class="empty">No differences detected.</p>
+          <div id="sections" class="sections"></div>
+        </section>
+      </main>
+    </div>
+    <script src="/app.js"></script>
   </body>
 </html>

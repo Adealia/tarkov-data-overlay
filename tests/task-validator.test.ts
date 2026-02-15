@@ -359,6 +359,37 @@ describe('validateTaskOverride', () => {
       expect(result.stillNeeded).toBe(true);
       expect(result.details.some((d) => d.status === 'check')).toBe(true);
     });
+
+    it('treats objective map arrays as exact comparisons', () => {
+      const apiTask = createApiTask({
+        objectives: [
+          {
+            id: 'obj-1',
+            maps: [
+              { id: 'customs', name: 'Customs' },
+              { id: 'woods', name: 'Woods' },
+            ],
+          },
+        ],
+      });
+      const override: TaskOverride = {
+        objectives: {
+          'obj-1': {
+            maps: [{ id: 'woods', name: 'Woods' }],
+          },
+        },
+      };
+      const result = validateTaskOverride('test-task-id', override, [apiTask]);
+
+      expect(
+        result.details.some(
+          (d) =>
+            d.field === 'objective:obj-1:maps' &&
+            d.status === 'needed' &&
+            d.message.includes('STILL NEEDED')
+        )
+      ).toBe(true);
+    });
   });
 
   describe('objectivesAdd validation', () => {
@@ -497,6 +528,125 @@ describe('validateTaskOverride', () => {
 
       expect(
         result.details.some((d) => d.field === 'startRewards' && d.status === 'needed')
+      ).toBe(true);
+    });
+  });
+
+  describe('experience validation', () => {
+    it('returns FIXED when experience matches API', () => {
+      const apiTask = createApiTask({ experience: 12000 });
+      const override: TaskOverride = { experience: 12000 };
+      const result = validateTaskOverride('test-task-id', override, [apiTask]);
+
+      expect(
+        result.details.some((d) => d.field === 'experience' && d.status === 'fixed')
+      ).toBe(true);
+    });
+
+    it('returns NEEDED when experience differs from API', () => {
+      const apiTask = createApiTask({ experience: 12000 });
+      const override: TaskOverride = { experience: 13000 };
+      const result = validateTaskOverride('test-task-id', override, [apiTask]);
+
+      expect(
+        result.details.some((d) => d.field === 'experience' && d.status === 'needed')
+      ).toBe(true);
+    });
+  });
+
+  describe('finishRewards validation', () => {
+    it('returns FIXED when override is a subset of API rewards', () => {
+      const apiTask = createApiTask({
+        finishRewards: {
+          items: [
+            { item: { id: 'rub', name: 'Roubles' }, count: 500000 },
+            { item: { id: 'ammo', name: 'Ammo' }, count: 20 },
+          ],
+        },
+      });
+      const override: TaskOverride = {
+        finishRewards: {
+          items: [{ item: { id: 'rub', name: 'Roubles' }, count: 500000 }],
+        },
+      };
+      const result = validateTaskOverride('test-task-id', override, [apiTask]);
+
+      expect(
+        result.details.some((d) => d.field === 'finishRewards' && d.status === 'fixed')
+      ).toBe(true);
+    });
+
+    it('returns NEEDED when finishRewards differs from API', () => {
+      const apiTask = createApiTask({
+        finishRewards: {
+          items: [{ item: { id: 'rub', name: 'Roubles' }, count: 500000 }],
+        },
+      });
+      const override: TaskOverride = {
+        finishRewards: {
+          items: [{ item: { id: 'rub', name: 'Roubles' }, count: 750000 }],
+        },
+      };
+      const result = validateTaskOverride('test-task-id', override, [apiTask]);
+
+      expect(
+        result.details.some((d) => d.field === 'finishRewards' && d.status === 'needed')
+      ).toBe(true);
+    });
+  });
+
+  describe('traderRequirements validation', () => {
+    it('returns FIXED when traderRequirements matches API', () => {
+      const apiTask = createApiTask({
+        traderRequirements: [
+          {
+            trader: { id: '54cb50c76803fa8b248b4571', name: 'Prapor' },
+            value: 2,
+            compareMethod: '>=',
+          },
+        ],
+      });
+      const override: TaskOverride = {
+        traderRequirements: [
+          {
+            trader: { id: '54cb50c76803fa8b248b4571', name: 'Prapor' },
+            value: 2,
+          },
+        ],
+      };
+      const result = validateTaskOverride('test-task-id', override, [apiTask]);
+
+      expect(
+        result.details.some(
+          (d) => d.field === 'traderRequirements' && d.status === 'fixed'
+        )
+      ).toBe(true);
+    });
+
+    it('returns NEEDED when traderRequirements differs from API', () => {
+      const apiTask = createApiTask({
+        traderRequirements: [
+          {
+            trader: { id: '54cb50c76803fa8b248b4571', name: 'Prapor' },
+            value: 2,
+            compareMethod: '>=',
+          },
+        ],
+      });
+      const override: TaskOverride = {
+        traderRequirements: [
+          {
+            trader: { id: '54cb50c76803fa8b248b4571', name: 'Prapor' },
+            value: 3,
+          },
+        ],
+      };
+      const result = validateTaskOverride('test-task-id', override, [apiTask]);
+
+      expect(
+        result.details.some(
+          (d) => d.field === 'traderRequirements' && d.status === 'needed'
+        )
       ).toBe(true);
     });
   });
