@@ -827,20 +827,7 @@
       ]
     }
   },
-  "itemsAdd": {
-    "can_of_duck_pate": {
-      "id": "69774bb0a247161ff1068335",
-      "name": "Can of Duck pate"
-    },
-    "duckov_poster": {
-      "id": "697cdbfd14e9320980057487",
-      "name": "Duckov poster"
-    },
-    "duck_figurine": {
-      "id": "697cddb414e932098005748d",
-      "name": "Duck Figurine"
-    }
-  },
+  "itemsAdd": {},
   "tasksAdd": {
     "setting_priorities": {
       "id": "setting_priorities",
@@ -2135,7 +2122,7 @@
           "type": "giveItem",
           "items": [
             {
-              "id": "can_of_duck_pate",
+              "id": "69774bb0a247161ff1068335",
               "name": "Can of duck pate"
             }
           ],
@@ -2179,7 +2166,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-12T19:58:01.606Z",
-    "sha256": "2f49838ec34a0c0f2baa7895a3d8753165ec6f08137f31203681c8cab1aebbcb"
+    "generated": "2026-02-15T15:43:24.995Z",
+    "sha256": "5a9dc8010d4c27cac3482b1da9b3ef82ebb2873cc7c0001878f19e527a906c74"
   }
 }
