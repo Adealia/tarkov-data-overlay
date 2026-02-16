@@ -272,19 +272,11 @@
     },
   },
 
-  // Test Drive - Part 6 - Experience and reputation incorrect
+  // Test Drive - Part 6 - Experience incorrect
   // Proof: https://escapefromtarkov.fandom.com/wiki/Test_Drive_-_Part_6
   // Recent wiki update (post-1.0); not verified in-game
   '675c1ff1a757ddd00404f0aa': {
     experience: 32000, // Was: 65000
-    finishRewards: {
-      traderStanding: [
-        {
-          trader: { name: 'Prapor' },
-          standing: 0.02, // Was: 0.03
-        },
-      ],
-    },
   },
 
   // No Swiping - Objective count incorrect
