@@ -717,6 +717,31 @@
           "count": 20
         }
       }
+    },
+    "6179b5b06e9dd54ac275e409": {
+      "objectives": {
+        "6194fbf785a6d62c481a7aee": {
+          "foundInRaid": true
+        }
+      }
+    },
+    "626bd75c71bd851e971b82a5": {
+      "experience": 7500
+    },
+    "5c112d7e86f7740d6f647486": {
+      "experience": 10000
+    },
+    "675c3582f6ddc329a90f9c6d": {
+      "experience": 11000
+    },
+    "60e71c48c1bfa3050473b8e5": {
+      "experience": 34000
+    },
+    "6573397ef3f8344c4575cd87": {
+      "experience": 6600
+    },
+    "66aba85403e0ee3101042877": {
+      "experience": 24000
     }
   },
   "editions": {
@@ -2328,10 +2353,25 @@
             "standing": 0.03
           }
         ],
+        "customization": [
+          {
+            "id": "duck_hunt_customization01",
+            "name": "Scavenger target",
+            "customizationType": "ShootingRangeMark",
+            "customizationTypeName": "Targets"
+          }
+        ],
+        "achievement": [
+          {
+            "id": "6984ab58ee0ae2c0d5075f33",
+            "name": "Duck Hunt",
+            "description": "Complete the Duck Hunt 2026 event task"
+          }
+        ],
         "skillLevelReward": [
           {
             "name": "Perception",
-            "level": 0.04,
+            "level": 4,
             "skill": {
               "id": "Perception",
               "name": "Perception"
@@ -2343,7 +2383,7 @@
   },
   "$meta": {
     "version": "1.0.0",
-    "generated": "2026-02-15T20:13:54.013Z",
-    "sha256": "15f105190e5d4d60ca7481655924c3d512d2ca6031b0e61c98e080abd42411dd"
+    "generated": "2026-02-16T16:00:31.402Z",
+    "sha256": "959274abacad921647fc486ff3daa831268758067282e550f6ba11fba93ac61f"
   }
 }
