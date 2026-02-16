@@ -753,4 +753,10 @@
   '675c3582f6ddc329a90f9c6d': {
     experience: 11000, // Was: 23000
   },
+  // Crisis - Experience incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Crisis
+  // Wiki rewards show +34,000 EXP.
+  '60e71c48c1bfa3050473b8e5': {
+    experience: 34000, // Was: 97000
+  },
 }
