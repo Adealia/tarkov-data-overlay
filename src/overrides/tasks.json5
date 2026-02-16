@@ -735,4 +735,10 @@
       },
     },
   },
+  // Reconnaissance - Experience incorrect
+  // Proof: https://escapefromtarkov.fandom.com/wiki/Reconnaissance
+  // Wiki rewards show +7,500 EXP.
+  '626bd75c71bd851e971b82a5': {
+    experience: 7500, // Was: 18000
+  },
 }
