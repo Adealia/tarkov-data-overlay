@@ -57,7 +57,7 @@
     objectives: {
       '5c1b765d86f77413193fa4f2': {
         count: 10, // Was: 5
-        description: 'Eliminate PMC operatives using an SR-25 with Hybrid 46 suppressor and Schmidt & Bender PM II 1-8x24 scope',
+        description: 'Eliminate PMCs using an SR-25 with Hybrid 46 suppressor and Schmidt & Bender PM II 1-8x24 scope',
         usingWeapon: [
           {
             id: '5df8ce05b11454561e39243b',
